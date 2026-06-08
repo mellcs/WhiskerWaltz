@@ -1,0 +1,223 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Georgia, serif;
+}
+
+.game-screen {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* FUNDO */
+
+.background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  position: absolute;
+  inset: 0;
+}
+
+/* NPC */
+
+.npc {
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  height: 72vh;
+  object-fit: contain;
+}
+
+/* PLAYER UI */
+
+.player-ui {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  z-index: 10;
+}
+
+.avatar-box {
+  width: 180px;
+  height: 180px;
+
+  background: rgba(255,255,255,0.9);
+  border: 4px solid #8a5b39;
+  border-radius: 24px;
+
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-fur,
+.avatar-layer {
+  position: absolute;
+
+  width: 230%;
+  height: 230%;
+
+  object-fit: contain;
+
+  top: -5%;
+  left: -75%;
+}
+
+.avatar-fur {
+  z-index: 1;
+}
+
+.avatar-layer {
+  z-index: 2;
+}
+
+.player-name {
+  background: #fff4df;
+  color: #3a2415;
+
+  padding: 8px 16px;
+  border-radius: 14px;
+
+  font-weight: bold;
+}
+
+/* DIALOGUE */
+
+.dialogue-box {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 55%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  z-index: 10;
+}
+
+.dialogue-option {
+  padding: 18px;
+  border: none;
+  border-radius: 18px;
+
+  background: rgba(255,244,223,0.95);
+  color: #3a2415;
+
+  font-size: 18px;
+  text-align: left;
+
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.dialogue-option:hover {
+  transform: translateY(-2px);
+  background: white;
+}
+
+/* AFFECTION */
+
+.affection-meter {
+  position: absolute;
+  right: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 34px;
+  height: 320px;
+
+  background: rgba(255,255,255,0.3);
+  border: 3px solid rgb(106, 87, 87);
+  border-radius: 999px;
+
+  overflow: hidden;
+}
+
+.affection-fill {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  background: hotpink;
+}
+
+.backpack {
+  transform: translateX(3px) translateY(-2px) scale(1.05);
+}
+
+.bandana {
+  transform: translateY(-5px);
+}
+
+.necklace {
+  transform: translateX(0px) translateY(-5px);
+}
+
+.purse {
+  transform: translateY(-10px);
+}
+
+.vest {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.primi {
+  position: absolute;
+  bottom: -350px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1000px;
+  z-index: 3;
+}
+
+.bungo {
+  position: absolute;
+  bottom: -270px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1000px;
+  z-index: 3;
+}
+
+.carin {
+  position: absolute;
+  bottom: -350px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1000px;
+  z-index: 3;
+}
+
+.clove {
+  position: absolute;
+  bottom: -350px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1000px;
+  z-index: 3;
+}
+
+.master-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}

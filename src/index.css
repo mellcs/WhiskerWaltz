@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.screen {
+  width: 100vw;
+  height: 100vh;
+  /* Substitua o gradiente pela imagem */
+  background-image: url('public/background.png'); 
+  
+  /* Garante que a imagem cubra toda a tela sem esticar */
+  background-size: cover; 
+  
+  /* Centraliza a imagem caso ela seja maior que a tela */
+  background-position: center; 
+  
+  /* Impede que a imagem se repita caso a tela seja muito grande */
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/* menu */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  width: 420px;
+
+  transform: translateX(-90px);
+}
+
+.btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin: 0;
+
+  filter: drop-shadow(0px 4px 8px rgb(0, 0, 0));
+  transition: transform 0.2s; /* Opcional: para um efeito suave ao passar o mouse */
+}
+
+.btn img {
+  width: 100%;
+  display: block;
+}
+
+/* placa */
+.placa {
+  width: min(70vw, 1200px);
+  height: auto;
+  display: block;
+
+  transform: translateX(-120px);
+
+  filter: drop-shadow(5px 10px 15px rgb(0, 0, 0));
+}
