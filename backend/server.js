@@ -14,7 +14,7 @@ const client = new OpenAI({
 const app = express()
 
 app.use(cors({
-  origin: "https://whisker-waltz.vercel.app"
+  origin: /\.vercel\.app$/
 }))
 app.use(express.json())
 
