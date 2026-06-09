@@ -1,45 +1,41 @@
 import express from "express"
 import cors from "cors"
+import dotenv from "dotenv"
+import OpenAI from "openai"
+import { loadLore, searchLore } from "./rag.js"
 
-import {
-  loadLore,
-  searchLore,
-} from "./rag.js"
+dotenv.config()
+
+const client = new OpenAI({
+  baseURL: "https://router.huggingface.co/v1",
+  apiKey: process.env.HF_TOKEN,
+})
 
 const app = express()
 
-app.use(cors())
-
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "*"
+}))
 app.use(express.json())
 
-// CARREGAR LORE
 loadLore()
 
-// CHAT
 app.post("/chat", async (req, res) => {
-
   try {
+    const userMessage = req.body.message
 
-    const userMessage =
-      req.body.message
+    if (!userMessage) {
+      return res.status(400).json({ reply: "Mensagem não informada." })
+    }
 
-    console.log(
-      "Mensagem:",
-      userMessage
-    )
+    console.log("Mensagem:", userMessage)
 
-    // BUSCA CONTEXTO
-    const loreContext =
-      searchLore(userMessage)
+    const loreContext = searchLore(userMessage)
 
-    // PROMPT
     const prompt = `
 Você é um assistente do jogo Whisker Waltz.
-
 Você vive no universo do Vale do Lírio.
-
 Responda de forma gentil, acolhedora e imersiva.
-
 Use apenas as informações abaixo.
 
 UNIVERSO:
@@ -49,46 +45,24 @@ PERGUNTA:
 ${userMessage}
 `
 
-    // OLLAMA
-    const response = await fetch(
-      "http://localhost:11434/api/generate",
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type":
-            "application/json",
-        },
-
-        body: JSON.stringify({
-          model: "llama3",
-          prompt,
-          stream: false,
-        }),
-      }
-    )
-
-    const data =
-      await response.json()
-
-    res.json({
-      reply: data.response,
+    const completion = await client.chat.completions.create({
+      model: "google/gemma-2-2b-it:featherless-ai",
+      messages: [{ role: "user", content: prompt }],
+      max_completion_tokens: 300,
     })
+
+    const reply =
+      completion.choices?.[0]?.message?.content || "Sem resposta."
+
+    console.log("REPLY:", reply)
+
+    res.json({ reply })  // ← estava faltando
 
   } catch (error) {
-
     console.error(error)
-
-    res.status(500).json({
-      reply:
-        "Erro ao falar com o assistente.",
-    })
+    res.status(500).json({ reply: "Erro ao falar com o assistente." })
   }
 })
 
-app.listen(3001, () => {
-
-  console.log(
-    "Servidor rodando!"
-  )
-})
+const PORT = process.env.PORT || 3001 
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}!`))

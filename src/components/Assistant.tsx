@@ -31,8 +31,7 @@ function Assistant() {
 
     try {
 
-      const response = await fetch(
-        "http://localhost:3001/chat",
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/chat`,
         {
           method: "POST",
 
@@ -49,6 +48,10 @@ function Assistant() {
 
       const data = await response.json()
 
+      console.log("DATA:", data)
+      console.log("REPLY:", data.reply)
+      console.log("TIPO:", typeof data.reply)
+
       setMessages((prev) => [
         ...prev,
         {
@@ -58,6 +61,8 @@ function Assistant() {
       ])
 
     } catch (error) {
+
+      console.error(error)
 
       setMessages((prev) => [
         ...prev,
