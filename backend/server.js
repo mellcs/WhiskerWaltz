@@ -7,7 +7,7 @@ import { loadLore, searchLore } from "./rag.js"
 dotenv.config()
 
 const client = new OpenAI({
-  baseURL: "https://router.huggingface.co/v1",
+  baseURL: "https://api-inference.huggingface.co/v1",
   apiKey: process.env.HF_TOKEN,
 })
 
@@ -46,7 +46,7 @@ ${userMessage}
 `
 
     const completion = await client.chat.completions.create({
-      model: "google/gemma-2-2b-it:featherless-ai",
+      model: "HuggingFaceH4/zephyr-7b-beta",
       messages: [{ role: "user", content: prompt }],
       max_completion_tokens: 300,
     })
