@@ -46,7 +46,7 @@ ${userMessage}
 `
 
     const completion = await client.chat.completions.create({
-      model: "HuggingFaceH4/zephyr-7b-beta",
+      model: "mistralai/Mistral-7B-Instruct-v0.3",
       messages: [{ role: "user", content: prompt }],
       max_completion_tokens: 300,
     })
